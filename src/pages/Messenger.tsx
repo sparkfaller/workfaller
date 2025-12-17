@@ -59,12 +59,15 @@ export default function Messenger() {
         const currentSelectedId = selectedUserRef.current
         if (currentSelectedId) {
           // Check if the message involves the currently selected user
-          // (Either they sent it to me, or I sent it to them)
           if (newMsg.sender_id === currentSelectedId || newMsg.receiver_id === currentSelectedId) {
+            // Optimistically update first
             setMessages(prev => {
               if (prev.some(m => m.id === newMsg.id)) return prev
               return [...prev, newMsg]
             })
+            
+            // Then re-fetch to ensure consistency (optional but safer)
+            // fetchMessages(currentSelectedId) 
           }
         }
       }
@@ -137,22 +140,26 @@ export default function Messenger() {
     }
   }
 
-  const fetchMessages = async () => {
-    if (!selectedUser || !user) return
-    setLoading(true)
+  const fetchMessages = async (targetUserId?: string) => {
+    const targetId = targetUserId || selectedUser?.id
+    if (!targetId || !user) return
+    
+    // Only set loading if it's an initial fetch (not a realtime update)
+    if (!targetUserId) setLoading(true)
     
     const { data, error } = await supabase
       .from('messages')
       .select('*')
-      .or(`and(sender_id.eq.${user.id},receiver_id.eq.${selectedUser.id}),and(sender_id.eq.${selectedUser.id},receiver_id.eq.${user.id})`)
+      .or(`and(sender_id.eq.${user.id},receiver_id.eq.${targetId}),and(sender_id.eq.${targetId},receiver_id.eq.${user.id})`)
       .order('created_at', { ascending: true })
 
     if (error) {
-      showToast('메시지를 불러오는데 실패했습니다.', 'error')
+      console.error('Error fetching messages:', error)
+      if (!targetUserId) showToast('메시지를 불러오는데 실패했습니다.', 'error')
     } else {
       setMessages(data || [])
     }
-    setLoading(false)
+    if (!targetUserId) setLoading(false)
   }
 
   const handleSendMessage = async (e: React.FormEvent) => {
