@@ -151,7 +151,6 @@ function App() {
               }
             />
             <Route path="/" element={<RedirectToDashboard />} />
-            <Route path="*" element={<NotFound />} />
           </Routes>
         </HashRouter>
       </UIProvider>
