@@ -19,11 +19,6 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
 import './App.css'
 
-function RedirectToDashboard() {
-  const location = useLocation()
-  return <Navigate to={`/dashboard${location.search}`} replace />
-}
-
 function App() {
   return (
     <AuthProvider>
@@ -151,7 +146,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/" element={<RedirectToDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </HashRouter>
