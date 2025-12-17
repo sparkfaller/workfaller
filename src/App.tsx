@@ -14,6 +14,7 @@ import Messenger from './pages/Messenger'
 import Settings from './pages/Settings'
 import Admin from './pages/Admin'
 import OrgSetup from './pages/OrgSetup'
+import NotFound from './pages/NotFound'
 import ProtectedRoute from './components/ProtectedRoute'
 import Layout from './components/Layout'
 import './App.css'
@@ -151,6 +152,7 @@ function App() {
               }
             />
             <Route path="/" element={<RedirectToDashboard />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
       </UIProvider>
