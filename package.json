@@ -6,7 +6,7 @@
   "homepage": "work.developerlog.tech",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cp dist/index.html dist/404.html",
+    "build": "vite build",
     "typecheck": "tsc -b --noEmit",
     "lint": "eslint .",
     "preview": "vite preview"
