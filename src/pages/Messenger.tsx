@@ -17,6 +17,7 @@ interface UserProfile {
   full_name: string
   email: string
   avatar_url?: string
+  position?: string
 }
 
 export default function Messenger() {
@@ -26,6 +27,7 @@ export default function Messenger() {
   const [selectedUser, setSelectedUser] = useState<UserProfile | null>(null)
   const [messages, setMessages] = useState<Message[]>([])
   const [lastMessages, setLastMessages] = useState<Record<string, Message>>({})
+  const [unreadCounts, setUnreadCounts] = useState<Record<string, number>>({})
   const [newMessage, setNewMessage] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const [loading, setLoading] = useState(false)
@@ -37,6 +39,7 @@ export default function Messenger() {
     selectedUserRef.current = selectedUser?.id || null
     if (selectedUser) {
       fetchMessages()
+      markAsRead(selectedUser.id)
     }
   }, [selectedUser])
 
@@ -44,6 +47,7 @@ export default function Messenger() {
     if (user && profile?.organization_id) {
       fetchUsers()
       fetchLastMessages()
+      fetchUnreadCounts()
 
       const handleNewMessage = (payload: any) => {
         const newMsg = payload.new as Message
@@ -66,9 +70,19 @@ export default function Messenger() {
               return [...prev, newMsg]
             })
             
-            // Then re-fetch to ensure consistency (optional but safer)
-            // fetchMessages(currentSelectedId) 
+            // If I am the receiver and the chat is open, mark as read
+            if (newMsg.receiver_id === user.id && newMsg.sender_id === currentSelectedId) {
+              markAsRead(currentSelectedId)
+            }
           }
+        }
+
+        // 3. Update Unread Count if I am the receiver and chat is NOT open
+        if (newMsg.receiver_id === user.id && newMsg.sender_id !== currentSelectedId) {
+          setUnreadCounts(prev => ({
+            ...prev,
+            [newMsg.sender_id]: (prev[newMsg.sender_id] || 0) + 1
+          }))
         }
       }
 
@@ -129,7 +143,7 @@ export default function Messenger() {
       // Get all members of the organization directly from profiles
       const { data: profiles, error: profileError } = await supabase
         .from('profiles')
-        .select('id, full_name, email, avatar_url')
+        .select('id, full_name, email, avatar_url, position')
         .eq('organization_id', profile?.organization_id)
         .neq('id', user?.id) // Exclude self
 
@@ -138,6 +152,41 @@ export default function Messenger() {
     } catch (error) {
       console.error('Error fetching users:', error)
     }
+  }
+
+  const fetchUnreadCounts = async () => {
+    if (!user) return
+    
+    const { data, error } = await supabase
+      .from('messages')
+      .select('sender_id')
+      .eq('receiver_id', user.id)
+      .eq('is_read', false)
+    
+    if (data) {
+      const counts: Record<string, number> = {}
+      data.forEach(msg => {
+        counts[msg.sender_id] = (counts[msg.sender_id] || 0) + 1
+      })
+      setUnreadCounts(counts)
+    }
+  }
+
+  const markAsRead = async (senderId: string) => {
+    if (!user) return
+    
+    // Optimistic update
+    setUnreadCounts(prev => ({
+      ...prev,
+      [senderId]: 0
+    }))
+
+    await supabase
+      .from('messages')
+      .update({ is_read: true })
+      .eq('sender_id', senderId)
+      .eq('receiver_id', user.id)
+      .eq('is_read', false)
   }
 
   const fetchMessages = async (targetUserId?: string) => {
@@ -251,7 +300,10 @@ export default function Messenger() {
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-                    <div style={{ fontWeight: '600', color: '#374151' }}>{u.full_name || '이름 없음'}</div>
+                    <div style={{ fontWeight: '600', color: '#374151' }}>
+                      {u.full_name || '이름 없음'}
+                      {u.position && <span style={{ fontSize: '0.8rem', color: '#6b7280', marginLeft: '6px', fontWeight: 'normal' }}>{u.position}</span>}
+                    </div>
                     {lastMsg && (
                       <div style={{ fontSize: '0.7rem', color: '#9ca3af' }}>
                         {new Date(lastMsg.created_at).toLocaleDateString() === new Date().toLocaleDateString() 
@@ -260,8 +312,28 @@ export default function Messenger() {
                       </div>
                     )}
                   </div>
-                  <div style={{ fontSize: '0.8rem', color: '#6b7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                    {lastMsg ? lastMsg.content : u.email}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div style={{ fontSize: '0.8rem', color: '#6b7280', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', flex: 1 }}>
+                      {lastMsg ? lastMsg.content : u.email}
+                    </div>
+                    {unreadCounts[u.id] > 0 && (
+                      <div style={{ 
+                        backgroundColor: '#ef4444', 
+                        color: 'white', 
+                        fontSize: '0.7rem', 
+                        fontWeight: 'bold', 
+                        minWidth: '18px', 
+                        height: '18px', 
+                        borderRadius: '9px', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        justifyContent: 'center',
+                        padding: '0 5px',
+                        marginLeft: '8px'
+                      }}>
+                        {unreadCounts[u.id]}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -273,8 +345,9 @@ export default function Messenger() {
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'rgba(255,255,255,0.3)' }}>
           {selectedUser ? (
             <>
-              <div style={{ padding: '15px 20px', borderBottom: '1px solid rgba(0,0,0,0.1)', backgroundColor: 'rgba(255,255,255,0.5)', fontWeight: 'bold' }}>
-                {selectedUser.full_name}님과의 대화
+              <div style={{ padding: '15px 20px', borderBottom: '1px solid rgba(0,0,0,0.1)', backgroundColor: 'rgba(255,255,255,0.5)', fontWeight: 'bold', display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                <span style={{ fontSize: '1.1rem' }}>{selectedUser.full_name}</span>
+                {selectedUser.position && <span style={{ fontSize: '0.9rem', color: '#6b7280', fontWeight: 'normal' }}>{selectedUser.position}</span>}
               </div>
               
               <div style={{ flex: 1, overflowY: 'auto', padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
