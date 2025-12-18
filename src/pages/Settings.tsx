@@ -132,24 +132,24 @@ export default function Settings() {
   return (
     <div className="page-container">
       <div className="glass-header" style={{ 
-        marginBottom: '30px',
-        padding: '20px 30px',
-        borderRadius: '16px',
+        marginBottom: '1.875rem',
+        padding: '1.25rem 1.875rem',
+        borderRadius: '1rem',
         borderBottom: 'none'
       }}>
         <h1 style={{ fontSize: '1.8rem', color: '#4f46e5', margin: 0 }}>설정</h1>
       </div>
 
-      <div style={{ display: 'grid', gap: '30px', maxWidth: '800px' }}>
+      <div style={{ display: 'grid', gap: '1.875rem', maxWidth: '50rem' }}>
         {/* Profile Settings */}
-        <section className="glass-panel" style={{ padding: '30px' }}>
-          <h2 style={{ marginTop: 0, marginBottom: '20px', color: '#374151', borderBottom: '1px solid #e5e7eb', paddingBottom: '10px' }}>
+        <section className="glass-panel" style={{ padding: '1.875rem' }}>
+          <h2 style={{ marginTop: 0, marginBottom: '1.25rem', color: '#374151', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.625rem' }}>
             👤 내 프로필
           </h2>
           
-          <div style={{ display: 'grid', gap: '20px' }}>
+          <div style={{ display: 'grid', gap: '1.25rem' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: '#4b5563', fontWeight: '500' }}>이메일</label>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#4b5563', fontWeight: '500' }}>이메일</label>
               <input 
                 type="email" 
                 value={user?.email || ''} 
@@ -159,7 +159,7 @@ export default function Settings() {
             </div>
 
             <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: '#4b5563', fontWeight: '500' }}>이름</label>
+              <label style={{ display: 'block', marginBottom: '0.5rem', color: '#4b5563', fontWeight: '500' }}>이름</label>
               <input 
                 type="text" 
                 value={fullName} 
@@ -173,11 +173,11 @@ export default function Settings() {
                 onClick={handleUpdateProfile}
                 disabled={loading}
                 style={{ 
-                  padding: '10px 20px',
+                  padding: '0.625rem 1.25rem',
                   backgroundColor: '#4f46e5',
                   color: 'white',
                   border: 'none',
-                  borderRadius: '8px',
+                  borderRadius: '0.5rem',
                   fontWeight: '600',
                   cursor: loading ? 'not-allowed' : 'pointer'
                 }}
@@ -189,34 +189,34 @@ export default function Settings() {
         </section>
 
         {/* Group Settings */}
-        <section className="glass-panel" style={{ padding: '30px' }}>
-          <h2 style={{ marginTop: 0, marginBottom: '20px', color: '#374151', borderBottom: '1px solid #e5e7eb', paddingBottom: '10px' }}>
+        <section className="glass-panel" style={{ padding: '1.875rem' }}>
+          <h2 style={{ marginTop: 0, marginBottom: '1.25rem', color: '#374151', borderBottom: '1px solid #e5e7eb', paddingBottom: '0.625rem' }}>
             🏢 소속 그룹 정보
           </h2>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
             <div>
-              <h3 style={{ margin: '0 0 5px 0', fontSize: '1.1rem' }}>{orgName || '소속 없음'}</h3>
+              <h3 style={{ margin: '0 0 0.3125rem 0', fontSize: '1.1rem' }}>{orgName || '소속 없음'}</h3>
               <p style={{ margin: 0, color: '#6b7280', fontSize: '0.9rem' }}>
                 {isOwner ? '관리자(소유자)' : '일반 멤버'}
               </p>
             </div>
           </div>
 
-          <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '20px' }}>
-            <h3 style={{ margin: '0 0 10px 0', fontSize: '1rem', color: '#ef4444' }}>위험 구역</h3>
-            <p style={{ margin: '0 0 15px 0', color: '#6b7280', fontSize: '0.9rem' }}>
+          <div style={{ borderTop: '1px solid #e5e7eb', paddingTop: '1.25rem' }}>
+            <h3 style={{ margin: '0 0 0.625rem 0', fontSize: '1rem', color: '#ef4444' }}>위험 구역</h3>
+            <p style={{ margin: '0 0 0.9375rem 0', color: '#6b7280', fontSize: '0.9rem' }}>
               그룹에서 탈퇴하거나 계정을 삭제할 수 있습니다.
             </p>
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ display: 'flex', gap: '0.625rem' }}>
               <button 
                 onClick={handleLeaveGroup}
                 style={{ 
-                  padding: '10px 20px',
+                  padding: '0.625rem 1.25rem',
                   backgroundColor: 'white',
                   color: '#ef4444',
                   border: '1px solid #ef4444',
-                  borderRadius: '8px',
+                  borderRadius: '0.5rem',
                   fontWeight: '600',
                   cursor: 'pointer'
                 }}
@@ -226,11 +226,11 @@ export default function Settings() {
               <button 
                 onClick={handleDeleteAccount}
                 style={{ 
-                  padding: '10px 20px',
+                  padding: '0.625rem 1.25rem',
                   backgroundColor: '#ef4444',
                   color: 'white',
                   border: 'none',
-                  borderRadius: '8px',
+                  borderRadius: '0.5rem',
                   fontWeight: '600',
                   cursor: 'pointer'
                 }}

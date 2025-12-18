@@ -20,10 +20,10 @@ export default function ProtectedRoute({ children }: ProtectedRouteProps) {
       fontWeight: '500'
     }}>
       <div style={{
-        padding: '20px',
+        padding: '1.25rem',
         background: 'rgba(255, 255, 255, 0.2)',
-        backdropFilter: 'blur(8px)',
-        borderRadius: '12px',
+        backdropFilter: 'blur(0.5rem)',
+        borderRadius: '0.75rem',
         boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
       }}>
         로딩 중...

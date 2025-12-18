@@ -95,22 +95,22 @@ export default function Signup() {
       alignItems: 'center',
       justifyContent: 'center',
       background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-      padding: '20px'
+      padding: '1.25rem'
     }}>
       <div className="glass-panel" style={{
         width: '100%',
-        maxWidth: '400px',
-        padding: '40px',
-        borderRadius: '24px'
+        maxWidth: '25rem',
+        padding: '2.5rem',
+        borderRadius: '1.5rem'
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <h1 style={{ fontSize: '2rem', color: '#4f46e5', marginBottom: '10px' }}>Workfaller</h1>
+        <div style={{ textAlign: 'center', marginBottom: '1.875rem' }}>
+          <h1 style={{ fontSize: '2rem', color: '#4f46e5', marginBottom: '0.625rem' }}>Workfaller</h1>
           <p style={{ color: '#6b7280' }}>새로운 계정을 생성하세요</p>
         </div>
 
-        <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <form onSubmit={handleSignup} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: '#374151', fontSize: '0.9rem' }}>이메일</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#374151', fontSize: '0.9rem' }}>이메일</label>
             <input
               type="email"
               value={email}
@@ -123,7 +123,7 @@ export default function Signup() {
           </div>
 
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: '#374151', fontSize: '0.9rem' }}>비밀번호</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#374151', fontSize: '0.9rem' }}>비밀번호</label>
             <input
               type="password"
               value={password}
@@ -135,13 +135,13 @@ export default function Signup() {
             />
             {/* Password Strength Meter */}
             {password && (
-              <div style={{ marginTop: '8px' }}>
+              <div style={{ marginTop: '0.5rem' }}>
                 <div style={{ 
-                  height: '4px', 
+                  height: '0.25rem', 
                   background: '#e5e7eb', 
-                  borderRadius: '2px', 
+                  borderRadius: '0.125rem', 
                   overflow: 'hidden',
-                  marginBottom: '4px'
+                  marginBottom: '0.25rem'
                 }}>
                   <div style={{ 
                     height: '100%', 
@@ -158,7 +158,7 @@ export default function Signup() {
           </div>
 
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', color: '#374151', fontSize: '0.9rem' }}>이름</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', color: '#374151', fontSize: '0.9rem' }}>이름</label>
             <input
               type="text"
               value={fullName}
@@ -175,7 +175,7 @@ export default function Signup() {
             disabled={loading}
             className="glass-button"
             style={{
-              marginTop: '10px',
+              marginTop: '0.625rem',
               background: 'linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)',
               color: 'white',
               border: 'none'
@@ -185,7 +185,7 @@ export default function Signup() {
           </button>
         </form>
 
-        <div style={{ marginTop: '20px', textAlign: 'center', fontSize: '0.9rem', color: '#6b7280' }}>
+        <div style={{ marginTop: '1.25rem', textAlign: 'center', fontSize: '0.9rem', color: '#6b7280' }}>
           이미 계정이 있으신가요?{' '}
           <Link to="/login" style={{ color: '#4f46e5', textDecoration: 'none', fontWeight: 600 }}>
             로그인

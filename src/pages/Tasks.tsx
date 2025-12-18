@@ -150,17 +150,17 @@ export default function Tasks() {
     showModal({
       title: isEdit ? '업무 수정' : '새 업무 등록',
       content: (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', width: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9375rem', width: '100%' }}>
           <input 
             placeholder="업무 제목" 
             defaultValue={title}
             onChange={(e) => title = e.target.value}
-            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #e5e7eb', fontSize: '1rem' }}
+            style={{ padding: '0.75rem', borderRadius: '0.5rem', border: '1px solid #e5e7eb', fontSize: '1rem' }}
           />
           
           {/* Assignee Selection */}
           <div>
-            <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9rem', color: '#374151' }}>담당자 / 담당팀</label>
+            <label style={{ display: 'block', marginBottom: '0.3125rem', fontSize: '0.9rem', color: '#374151' }}>담당자 / 담당팀</label>
             <select
               defaultValue={assigneeId}
               onChange={(e) => {
@@ -172,7 +172,7 @@ export default function Tasks() {
                 const isTeam = teams.some(t => t.id === value)
                 assigneeType = isTeam ? 'team' : 'user'
               }}
-              style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e5e7eb' }}
+              style={{ width: '100%', padding: '0.625rem', borderRadius: '0.5rem', border: '1px solid #e5e7eb' }}
             >
               <option value="">선택 안 함</option>
               <optgroup label="팀">
@@ -188,7 +188,7 @@ export default function Tasks() {
             </select>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3125rem' }}>
             <label style={{ fontSize: '0.8rem', color: '#6b7280' }}>상세 내용 (Markdown 지원)</label>
             <textarea 
               placeholder="업무 내용을 입력하세요. Markdown 문법을 사용할 수 있습니다." 
@@ -196,21 +196,21 @@ export default function Tasks() {
               onChange={(e) => description = e.target.value}
               rows={10}
               style={{ 
-                padding: '12px', 
-                borderRadius: '8px', 
+                padding: '0.75rem', 
+                borderRadius: '0.5rem', 
                 border: '1px solid #e5e7eb', 
                 fontFamily: 'monospace',
                 resize: 'vertical'
               }}
             />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.625rem' }}>
             <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9rem', color: '#374151' }}>우선순위</label>
+              <label style={{ display: 'block', marginBottom: '0.3125rem', fontSize: '0.9rem', color: '#374151' }}>우선순위</label>
               <select 
                 onChange={(e) => priority = e.target.value as 'low' | 'medium' | 'high'}
                 defaultValue={priority}
-                style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e5e7eb' }}
+                style={{ width: '100%', padding: '0.625rem', borderRadius: '0.5rem', border: '1px solid #e5e7eb' }}
               >
                 <option value="low">낮음</option>
                 <option value="medium">보통</option>
@@ -218,12 +218,12 @@ export default function Tasks() {
               </select>
             </div>
             <div>
-              <label style={{ display: 'block', marginBottom: '5px', fontSize: '0.9rem', color: '#374151' }}>마감일</label>
+              <label style={{ display: 'block', marginBottom: '0.3125rem', fontSize: '0.9rem', color: '#374151' }}>마감일</label>
               <input 
                 type="date"
                 defaultValue={dueDate}
                 onChange={(e) => dueDate = e.target.value}
-                style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #e5e7eb' }}
+                style={{ width: '100%', padding: '0.625rem', borderRadius: '0.5rem', border: '1px solid #e5e7eb' }}
               />
             </div>
           </div>
@@ -278,14 +278,14 @@ export default function Tasks() {
         <div style={{ width: '100%', maxHeight: '70vh', overflowY: 'auto' }}>
           <div style={{ 
             display: 'flex', 
-            gap: '10px', 
-            marginBottom: '20px',
+            gap: '0.625rem', 
+            marginBottom: '1.25rem',
             fontSize: '0.9rem',
             color: '#6b7280'
           }}>
             <span style={{ 
-              padding: '4px 8px', 
-              borderRadius: '4px',
+              padding: '0.25rem 0.5rem', 
+              borderRadius: '0.25rem',
               background: task.priority === 'high' ? '#fee2e2' : task.priority === 'medium' ? '#fef3c7' : '#d1fae5',
               color: task.priority === 'high' ? '#dc2626' : task.priority === 'medium' ? '#d97706' : '#059669'
             }}>
@@ -300,15 +300,15 @@ export default function Tasks() {
             </ReactMarkdown>
           </div>
           {(user?.id === task.creator_id || isAdmin) && (
-            <div style={{ marginTop: '30px', display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+            <div style={{ marginTop: '1.875rem', display: 'flex', justifyContent: 'flex-end', gap: '0.625rem' }}>
               <button
                 onClick={() => openTaskForm(task)}
                 style={{
-                  padding: '8px 16px',
+                  padding: '0.5rem 1rem',
                   background: '#4f46e5',
                   color: 'white',
                   border: 'none',
-                  borderRadius: '8px',
+                  borderRadius: '0.5rem',
                   cursor: 'pointer'
                 }}
               >
@@ -317,11 +317,11 @@ export default function Tasks() {
               <button
                 onClick={() => handleDeleteTask(task.id)}
                 style={{
-                  padding: '8px 16px',
+                  padding: '0.5rem 1rem',
                   background: '#ef4444',
                   color: 'white',
                   border: 'none',
-                  borderRadius: '8px',
+                  borderRadius: '0.5rem',
                   cursor: 'pointer'
                 }}
               >
@@ -356,19 +356,19 @@ export default function Tasks() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
-        marginBottom: '30px',
-        padding: '15px 30px',
-        borderRadius: '16px',
+        marginBottom: '1.875rem',
+        padding: '0.9375rem 1.875rem',
+        borderRadius: '1rem',
         borderBottom: 'none'
       }}>
         <h1 style={{ fontSize: '1.5rem', color: '#4f46e5' }}>업무 관리</h1>
-        <div style={{ display: 'flex', gap: '10px' }}>
-          <div style={{ display: 'flex', backgroundColor: 'white', borderRadius: '8px', padding: '4px', border: '1px solid #e5e7eb' }}>
+        <div style={{ display: 'flex', gap: '0.625rem' }}>
+          <div style={{ display: 'flex', backgroundColor: 'white', borderRadius: '0.5rem', padding: '0.25rem', border: '1px solid #e5e7eb' }}>
             <button
               onClick={() => setFilter('all')}
               style={{
-                padding: '6px 12px',
-                borderRadius: '6px',
+                padding: '0.375rem 0.75rem',
+                borderRadius: '0.375rem',
                 border: 'none',
                 backgroundColor: filter === 'all' ? '#4f46e5' : 'transparent',
                 color: filter === 'all' ? 'white' : '#6b7280',
@@ -381,8 +381,8 @@ export default function Tasks() {
             <button
               onClick={() => setFilter('my')}
               style={{
-                padding: '6px 12px',
-                borderRadius: '6px',
+                padding: '0.375rem 0.75rem',
+                borderRadius: '0.375rem',
                 border: 'none',
                 backgroundColor: filter === 'my' ? '#4f46e5' : 'transparent',
                 color: filter === 'my' ? 'white' : '#6b7280',
@@ -403,14 +403,14 @@ export default function Tasks() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(18.75rem, 1fr))', gap: '1.25rem' }}>
         {['pending', 'in_progress', 'completed'].map((status) => (
-          <div key={status} className="glass-panel" style={{ padding: '20px', alignSelf: 'start' }}>
+          <div key={status} className="glass-panel" style={{ padding: '1.25rem', alignSelf: 'start' }}>
             <h3 style={{ 
-              marginBottom: '20px', 
+              marginBottom: '1.25rem', 
               display: 'flex', 
               alignItems: 'center', 
-              gap: '10px',
+              gap: '0.625rem',
               color: status === 'pending' ? '#f59e0b' : status === 'in_progress' ? '#3b82f6' : '#10b981'
             }}>
               {status === 'pending' ? '대기 중' : status === 'in_progress' ? '진행 중' : '완료'}
@@ -419,21 +419,21 @@ export default function Tasks() {
               </span>
             </h3>
             
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9375rem' }}>
               {tasks.filter(t => t.status === status).map(task => (
                 <div 
                   key={task.id} 
                   className="glass-card" 
-                  style={{ padding: '15px', backgroundColor: 'rgba(255,255,255,0.5)', cursor: 'pointer' }}
+                  style={{ padding: '0.9375rem', backgroundColor: 'rgba(255,255,255,0.5)', cursor: 'pointer' }}
                   onClick={() => handleTaskClick(task)}
                 >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.3125rem' }}>
                     <span style={{ fontWeight: 'bold' }}>{task.title}</span>
-                    <div style={{ display: 'flex', gap: '5px', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.3125rem', alignItems: 'center' }}>
                       <span style={{ 
-                        fontSize: '12px', 
-                        padding: '2px 6px', 
-                        borderRadius: '4px',
+                        fontSize: '0.75rem', 
+                        padding: '0.125rem 0.375rem', 
+                        borderRadius: '0.25rem',
                         backgroundColor: task.priority === 'high' ? '#fee2e2' : task.priority === 'medium' ? '#fef3c7' : '#d1fae5',
                         color: task.priority === 'high' ? '#ef4444' : task.priority === 'medium' ? '#d97706' : '#059669'
                       }}>
@@ -441,7 +441,7 @@ export default function Tasks() {
                       </span>
                       {/* Assignee Badge */}
                       {(task.assignee_id || task.assignee_team_id) && (
-                        <span style={{ fontSize: '12px', color: '#6b7280', backgroundColor: '#f3f4f6', padding: '2px 6px', borderRadius: '4px' }}>
+                        <span style={{ fontSize: '0.75rem', color: '#6b7280', backgroundColor: '#f3f4f6', padding: '0.125rem 0.375rem', borderRadius: '0.25rem' }}>
                           {task.assignee_team_id 
                             ? `팀: ${teams.find(t => t.id === task.assignee_team_id)?.name || '알 수 없음'}`
                             : `담당: ${users.find(u => u.id === task.assignee_id)?.full_name || '알 수 없음'}`
@@ -456,7 +456,7 @@ export default function Tasks() {
                             border: 'none',
                             cursor: 'pointer',
                             color: '#ef4444',
-                            padding: '0 4px',
+                            padding: '0 0.25rem',
                             fontSize: '1.1rem',
                             lineHeight: 1
                           }}
@@ -468,9 +468,9 @@ export default function Tasks() {
                     </div>
                   </div>
                   <div style={{ 
-                    fontSize: '14px', 
+                    fontSize: '0.875rem', 
                     color: '#6b7280', 
-                    margin: '5px 0',
+                    margin: '0.3125rem 0',
                     display: '-webkit-box',
                     WebkitLineClamp: 3,
                     WebkitBoxOrient: 'vertical',
@@ -483,15 +483,15 @@ export default function Tasks() {
                     </ReactMarkdown>
                   </div>
                   {task.due_date && (
-                    <div style={{ fontSize: '12px', color: '#ef4444' }}>
+                    <div style={{ fontSize: '0.75rem', color: '#ef4444' }}>
                       마감: {new Date(task.due_date).toLocaleDateString()}
                     </div>
                   )}
-                  <div style={{ marginTop: '10px', display: 'flex', gap: '5px' }}>
+                  <div style={{ marginTop: '0.625rem', display: 'flex', gap: '0.3125rem' }}>
                     {status !== 'pending' && (
                       <button 
                         onClick={(e) => handleStatusChange(task.id, 'pending', e)}
-                        style={{ padding: '4px 8px', fontSize: '12px', backgroundColor: '#f3f4f6', color: '#374151', boxShadow: 'none' }}
+                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', backgroundColor: '#f3f4f6', color: '#374151', boxShadow: 'none' }}
                       >
                         대기
                       </button>
@@ -499,7 +499,7 @@ export default function Tasks() {
                     {status !== 'in_progress' && (
                       <button 
                         onClick={(e) => handleStatusChange(task.id, 'in_progress', e)}
-                        style={{ padding: '4px 8px', fontSize: '12px', backgroundColor: '#dbeafe', color: '#1d4ed8', boxShadow: 'none' }}
+                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', backgroundColor: '#dbeafe', color: '#1d4ed8', boxShadow: 'none' }}
                       >
                         진행
                       </button>
@@ -507,7 +507,7 @@ export default function Tasks() {
                     {status !== 'completed' && (
                       <button 
                         onClick={(e) => handleStatusChange(task.id, 'completed', e)}
-                        style={{ padding: '4px 8px', fontSize: '12px', backgroundColor: '#d1fae5', color: '#047857', boxShadow: 'none' }}
+                        style={{ padding: '0.25rem 0.5rem', fontSize: '0.75rem', backgroundColor: '#d1fae5', color: '#047857', boxShadow: 'none' }}
                       >
                         완료
                       </button>

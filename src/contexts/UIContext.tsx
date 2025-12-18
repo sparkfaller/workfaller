@@ -56,24 +56,24 @@ export function UIProvider({ children }: { children: ReactNode }) {
       {/* Toast Container */}
       <div style={{
         position: 'fixed',
-        bottom: '20px',
-        right: '20px',
+        bottom: '1.25rem',
+        right: '1.25rem',
         zIndex: 9999,
         display: 'flex',
         flexDirection: 'column',
-        gap: '10px'
+        gap: '0.625rem'
       }}>
         {toasts.map((toast) => (
           <div key={toast.id} className="glass-card" style={{
-            padding: '12px 24px',
+            padding: '0.75rem 1.5rem',
             backgroundColor: toast.type === 'error' ? 'rgba(239, 68, 68, 0.9)' : 
                            toast.type === 'success' ? 'rgba(16, 185, 129, 0.9)' : 
                            'rgba(59, 130, 246, 0.9)',
             color: 'white',
-            borderRadius: '8px',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+            borderRadius: '0.5rem',
+            boxShadow: '0 0.25rem 0.375rem rgba(0,0,0,0.1)',
             animation: 'slideIn 0.3s ease-out',
-            minWidth: '200px'
+            minWidth: '12.5rem'
           }}>
             {toast.message}
           </div>
@@ -89,20 +89,20 @@ export function UIProvider({ children }: { children: ReactNode }) {
           right: 0,
           bottom: 0,
           backgroundColor: 'rgba(0,0,0,0.5)',
-          backdropFilter: 'blur(4px)',
+          backdropFilter: 'blur(0.25rem)',
           zIndex: 9999,
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center'
         }}>
           <div className="glass-panel" style={{
-            padding: '30px',
+            padding: '1.875rem',
             width: '90%',
-            maxWidth: '400px',
+            maxWidth: '25rem',
             backgroundColor: 'white'
           }}>
-            <h3 style={{ marginTop: 0, marginBottom: '15px' }}>{modal.title}</h3>
-            {modal.message && <p style={{ marginBottom: '20px', color: '#4b5563' }}>{modal.message}</p>}
+            <h3 style={{ marginTop: 0, marginBottom: '0.9375rem' }}>{modal.title}</h3>
+            {modal.message && <p style={{ marginBottom: '1.25rem', color: '#4b5563' }}>{modal.message}</p>}
             {modal.content}
             
             {modal.type === 'prompt' && (
@@ -110,7 +110,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
                 type="text"
                 value={promptValue}
                 onChange={(e) => setPromptValue(e.target.value)}
-                style={{ marginBottom: '20px', width: '100%' }}
+                style={{ marginBottom: '1.25rem', width: '100%' }}
                 autoFocus
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
@@ -121,7 +121,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
               />
             )}
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '10px' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.625rem' }}>
               {modal.type !== 'alert' && (
                 <button
                   onClick={() => {

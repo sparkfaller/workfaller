@@ -55,22 +55,22 @@ export default function AddressBook() {
         display: 'flex', 
         justifyContent: 'space-between', 
         alignItems: 'center', 
-        marginBottom: '30px',
-        padding: '20px 30px',
-        borderRadius: '16px',
+        marginBottom: '1.875rem',
+        padding: '1.25rem 1.875rem',
+        borderRadius: '1rem',
         borderBottom: 'none'
       }}>
         <h1 style={{ fontSize: '1.8rem', color: '#4f46e5', margin: 0 }}>주소록</h1>
         <button 
           onClick={handleInvite}
           style={{ 
-            padding: '10px 20px', 
+            padding: '0.625rem 1.25rem', 
             backgroundColor: '#4f46e5', 
             color: 'white',
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '0.5rem',
             fontWeight: '600',
-            boxShadow: '0 4px 6px rgba(79, 70, 229, 0.2)'
+            boxShadow: '0 0.25rem 0.375rem rgba(79, 70, 229, 0.2)'
           }}
         >
           + 멤버 초대
@@ -78,44 +78,44 @@ export default function AddressBook() {
       </div>
 
       {loading ? (
-        <div style={{ textAlign: 'center', padding: '40px', color: '#6b7280' }}>로딩 중...</div>
+        <div style={{ textAlign: 'center', padding: '2.5rem', color: '#6b7280' }}>로딩 중...</div>
       ) : (
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', 
-          gap: '20px' 
+          gridTemplateColumns: 'repeat(auto-fill, minmax(17.5rem, 1fr))', 
+          gap: '1.25rem' 
         }}>
           {users.length === 0 ? (
-            <div className="glass-panel" style={{ gridColumn: '1 / -1', padding: '40px', textAlign: 'center', color: '#6b7280' }}>
+            <div className="glass-panel" style={{ gridColumn: '1 / -1', padding: '2.5rem', textAlign: 'center', color: '#6b7280' }}>
               등록된 멤버가 없습니다.
             </div>
           ) : (
             users.map((user) => (
               <div key={user.id} className="glass-card" style={{ 
-                padding: '25px', 
+                padding: '1.5625rem', 
                 display: 'flex', 
                 flexDirection: 'column',
                 alignItems: 'center', 
-                gap: '15px',
+                gap: '0.9375rem',
                 textAlign: 'center',
                 transition: 'transform 0.2s',
                 cursor: 'pointer'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-5px)'}
+              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-0.3125rem)'}
               onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
               >
                 <div style={{ 
-                  width: '80px', 
-                  height: '80px', 
+                  width: '5rem', 
+                  height: '5rem', 
                   borderRadius: '50%', 
                   backgroundColor: '#e0e7ff', 
                   display: 'flex', 
                   alignItems: 'center', 
                   justifyContent: 'center',
-                  fontSize: '32px',
-                  marginBottom: '5px',
-                  border: '3px solid white',
-                  boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+                  fontSize: '2rem',
+                  marginBottom: '0.3125rem',
+                  border: '0.1875rem solid white',
+                  boxShadow: '0 0.25rem 0.375rem rgba(0,0,0,0.1)'
                 }}>
                   {user.avatar_url ? (
                     <img src={user.avatar_url} alt={user.full_name} style={{ width: '100%', height: '100%', borderRadius: '50%', objectFit: 'cover' }} />

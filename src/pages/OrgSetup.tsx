@@ -106,16 +106,16 @@ export default function OrgSetup() {
       alignItems: 'center',
       justifyContent: 'center',
       background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
-      padding: '20px'
+      padding: '1.25rem'
     }}>
       <div className="glass-panel" style={{
         width: '100%',
-        maxWidth: '500px',
-        padding: '40px',
-        borderRadius: '24px'
+        maxWidth: '31.25rem',
+        padding: '2.5rem',
+        borderRadius: '1.5rem'
       }}>
-        <div style={{ textAlign: 'center', marginBottom: '30px' }}>
-          <h1 style={{ fontSize: '2rem', color: '#4f46e5', marginBottom: '10px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '1.875rem' }}>
+          <h1 style={{ fontSize: '2rem', color: '#4f46e5', marginBottom: '0.625rem' }}>
             {myOrgs.length > 0 ? '조직 관리' : '환영합니다!'}
           </h1>
           <p style={{ color: '#6b7280' }}>
@@ -127,9 +127,9 @@ export default function OrgSetup() {
 
         {/* My Organizations List */}
         {myOrgs.length > 0 && (
-          <div style={{ marginBottom: '30px' }}>
-            <h3 style={{ fontSize: '1rem', color: '#374151', marginBottom: '15px' }}>내 조직 목록</h3>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+          <div style={{ marginBottom: '1.875rem' }}>
+            <h3 style={{ fontSize: '1rem', color: '#374151', marginBottom: '0.9375rem' }}>내 조직 목록</h3>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
               {myOrgs.map(org => (
                 <button
                   key={org.id}
@@ -139,19 +139,19 @@ export default function OrgSetup() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                    padding: '15px',
+                    padding: '0.9375rem',
                     textAlign: 'left',
                     background: profile?.organization_id === org.id ? '#e0e7ff' : 'white'
                   }}
                 >
                   <span style={{ fontWeight: 600, color: '#1f2937' }}>{org.name}</span>
-                  <span style={{ fontSize: '0.8rem', color: '#6b7280', background: '#f3f4f6', padding: '2px 8px', borderRadius: '10px' }}>
+                  <span style={{ fontSize: '0.8rem', color: '#6b7280', background: '#f3f4f6', padding: '0.125rem 0.5rem', borderRadius: '0.625rem' }}>
                     {org.role === 'owner' ? '소유자' : '멤버'}
                   </span>
                 </button>
               ))}
             </div>
-            <div style={{ margin: '20px 0', borderBottom: '1px solid #e5e7eb' }}></div>
+            <div style={{ margin: '1.25rem 0', borderBottom: '1px solid #e5e7eb' }}></div>
           </div>
         )}
 
@@ -159,16 +159,16 @@ export default function OrgSetup() {
         <div style={{ 
           display: 'flex', 
           background: '#f3f4f6', 
-          padding: '4px', 
-          borderRadius: '12px',
-          marginBottom: '20px'
+          padding: '0.25rem', 
+          borderRadius: '0.75rem', 
+          marginBottom: '1.25rem'
         }}>
           <button
             onClick={() => setMode('create')}
             style={{
               flex: 1,
-              padding: '10px',
-              borderRadius: '8px',
+              padding: '0.625rem',
+              borderRadius: '0.5rem',
               border: 'none',
               background: mode === 'create' ? 'white' : 'transparent',
               color: mode === 'create' ? '#4f46e5' : '#6b7280',
@@ -184,8 +184,8 @@ export default function OrgSetup() {
             onClick={() => setMode('join')}
             style={{
               flex: 1,
-              padding: '10px',
-              borderRadius: '8px',
+              padding: '0.625rem',
+              borderRadius: '0.5rem',
               border: 'none',
               background: mode === 'join' ? 'white' : 'transparent',
               color: mode === 'join' ? '#4f46e5' : '#6b7280',
