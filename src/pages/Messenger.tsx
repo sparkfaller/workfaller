@@ -336,7 +336,17 @@ export default function Messenger() {
   }
 
   const createGroup = async () => {
-    if (!user || !newGroupName.trim() || selectedUsersForGroup.size === 0) return
+    if (!user) return
+    
+    if (!newGroupName.trim()) {
+      showToast('그룹 이름을 입력해주세요.', 'error')
+      return
+    }
+    
+    if (selectedUsersForGroup.size === 0) {
+      showToast('최소 한 명 이상의 대화 상대를 선택해주세요.', 'error')
+      return
+    }
 
     try {
       // 1. Create Room
@@ -366,9 +376,9 @@ export default function Messenger() {
       setNewGroupName('')
       setSelectedUsersForGroup(new Set())
       fetchRooms()
-    } catch (error) {
+    } catch (error: any) {
       console.error(error)
-      showToast('그룹 생성 실패', 'error')
+      showToast(`그룹 생성 실패: ${error.message || '알 수 없는 오류'}`, 'error')
     }
   }
 
@@ -884,7 +894,7 @@ export default function Messenger() {
               })}
             </div>
             <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.625rem' }}>
-              <button onClick={() => setIsCreateGroupModalOpen(false)} style={{ padding: '0.5rem 1rem', borderRadius: '0.375rem', border: '1px solid #e5e7eb', background: 'white', cursor: 'pointer' }}>취소</button>
+              <button onClick={() => setIsCreateGroupModalOpen(false)} style={{ padding: '0.5rem 1rem', borderRadius: '0.375rem', border: '1px solid #e5e7eb', background: 'white', color: '#374151', cursor: 'pointer' }}>취소</button>
               <button onClick={createGroup} style={{ padding: '0.5rem 1rem', borderRadius: '0.375rem', border: 'none', background: '#4f46e5', color: 'white', cursor: 'pointer' }}>생성</button>
             </div>
           </div>
