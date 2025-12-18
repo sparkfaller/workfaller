@@ -281,9 +281,9 @@ export default function Messenger() {
         setLastMessages(prev => ({ ...prev, [key]: data }))
         scrollToBottom()
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('File upload error:', error)
-      showToast('파일 업로드에 실패했습니다. (버킷이 존재하는지 확인해주세요)', 'error')
+      showToast(`파일 업로드 실패: ${error.message || '알 수 없는 오류'}`, 'error')
     } finally {
       if (fileInputRef.current) fileInputRef.current.value = ''
     }
