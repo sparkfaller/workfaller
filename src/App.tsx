@@ -1,4 +1,4 @@
-import { HashRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
 import { UIProvider } from './contexts/UIContext'
 import Login from './pages/Login'
@@ -28,7 +28,7 @@ function App() {
   return (
     <AuthProvider>
       <UIProvider>
-        <HashRouter>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/login" element={<Login />} />
@@ -154,7 +154,7 @@ function App() {
             <Route path="/" element={<RedirectToDashboard />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </HashRouter>
+        </BrowserRouter>
       </UIProvider>
     </AuthProvider>
   )
